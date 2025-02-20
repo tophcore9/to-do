@@ -1,9 +1,7 @@
 <template>
-    <div v-for="item in todos">
+    <div v-for="item in items">
         <div class="card card-body p-2 pl-5 mb-5">
-            <div>
-                {{item.content}}
-            </div>
+            <input type="text" class="input" v-model="item.content">
             <div>
                 <button class="button mr-2 is-success has-text-light">
                     &check;
@@ -20,38 +18,15 @@
 import {defineComponent, ref} from "vue";
 import TodoItem from "@/components/TodoItem.vue";
 
-const todos = ref([
-    {
-        id: 1,
-        content: 'Feed the cat',
-        done: true
-    },
-    {
-        id: 2,
-        content: 'Feed yourself',
-        done: false
-    },
-    {
-        id: 3,
-        content: 'Take a shower',
-        done: false
-    },
-    {
-        id: 4,
-        content: 'Something important',
-        done: true
-    },
-])
-
 defineComponent({
     TodoItem
 });
 
 defineProps({
-    // items: {
-    //     type: TodoItem,
-    //
-    // }
+    items: {
+        type: Object,
+        required: true
+    }
 })
 </script>
 
@@ -60,5 +35,11 @@ defineProps({
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.input {
+    border: none;
+    outline: none;
+    width: fit-content;
 }
 </style>
