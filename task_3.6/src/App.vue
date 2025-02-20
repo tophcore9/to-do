@@ -1,15 +1,11 @@
 <template>
-
+    
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 
-export default defineComponent({
-    
-});
 </script>
 
 <style>
-
+@import 'bulma/css/bulma.css';
 </style>
