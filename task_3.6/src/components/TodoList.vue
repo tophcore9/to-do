@@ -6,7 +6,7 @@
                 <button class="button mr-2 is-success has-text-light">
                     &check;
                 </button>
-                <button class="button is-danger has-text-light">
+                <button @click="removeItem(item.id)" class="button is-danger has-text-light">
                     &cross;
                 </button>
             </div>
@@ -28,6 +28,12 @@ defineProps({
         required: true
     }
 })
+
+const emit = defineEmits(["removeItem"]);
+
+const removeItem = (id: string) => {
+    emit("removeItem", id);
+}
 </script>
 
 <style scoped>

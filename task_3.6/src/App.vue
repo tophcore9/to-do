@@ -5,35 +5,36 @@
             <input v-model="currentAddValue" type="text" class="input mb-5 p-5" placeholder="Add a task">
             <button class="button w-3 mb-5 p-3 is-success has-text-light" :disabled="!currentAddValue">Add</button>
         </form>
-        <TodoList :items="todos"/>
+        <TodoList @removeItem="removeItem" :items="todos"/>
     </div>
 </template>
 
 <script setup lang="ts">
 import {defineComponent, ref} from "vue";
     import TodoList from "@/components/TodoList.vue";
+    import { v4 as uuidv4 } from 'uuid';
 
     defineComponent({TodoList});
 
-    /* VARIABLES */
+    /* REACTIVITY VARIABLES */
     const todos = ref([
         {
-            id: 1,
+            id: uuidv4(),
             content: 'Feed the cat',
             done: true
         },
         {
-            id: 2,
+            id: uuidv4(),
             content: 'Feed yourself',
             done: false
         },
         {
-            id: 3,
+            id: uuidv4(),
             content: 'Take a shower',
             done: false
         },
         {
-            id: 4,
+            id: uuidv4(),
             content: 'Something important',
             done: true
         },
@@ -43,10 +44,13 @@ import {defineComponent, ref} from "vue";
     /* METHODS */
     const addItem = () => {
         todos.value.push({
-            id: 1,
+            id: uuidv4(),
             content: currentAddValue.value,
             done: false
         });
+    };
+    const removeItem = (id: string) => {
+        todos.value = todos.value.filter(todo => todo.id !== id);
     }
 </script>
 
