@@ -20,7 +20,23 @@ import type {ITodoItem} from "@/main.ts";
 defineComponent({TodoList});
 
 /* REACTIVE DATA */
-const todos: Ref<ITodoItem[]> = ref([]);
+const todos: Ref<ITodoItem[]> = ref([
+    {
+        id: 1,
+        content: 'FIRST TASK',
+        done: false
+    },
+    {
+        id: 2,
+        content: 'SECOND TASK',
+        done: true
+    },
+    {
+        id: 3,
+        content: 'THIRD TASK',
+        done: false
+    },
+]);
 const currentAddValue = ref('');
 
 /* METHODS */
