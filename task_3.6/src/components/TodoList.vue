@@ -1,51 +1,37 @@
 <template>
     <div v-for="item in items">
-        <div class="card card-body p-2 pl-5 mb-5">
-            <input type="text" class="input" v-model="item.content">
-            <div>
-                <button class="button mr-2 is-success has-text-light">
-                    &check;
-                </button>
-                <button @click="removeItem(item.id)" class="button is-danger has-text-light">
-                    &cross;
-                </button>
-            </div>
-        </div>
+        <TodoItem @remove-item="removeItem(item.id)" :item="item"/>
     </div>
 </template>
 
 <script setup lang="ts">
-import {defineComponent, ref} from "vue";
+/* IMPORTS */
+import {defineComponent, type PropType} from "vue";
 import TodoItem from "@/components/TodoItem.vue";
+import type {ITodoItem} from "@/main.ts";
 
+/* COMPONENTS */
 defineComponent({
     TodoItem
 });
 
+/* PROPS */
 defineProps({
     items: {
-        type: Object,
+        type: Object as PropType<ITodoItem[]>,
         required: true
     }
 })
 
+/* EMITS */
 const emit = defineEmits(["removeItem"]);
 
+/* METHODS */
 const removeItem = (id: string) => {
     emit("removeItem", id);
 }
 </script>
 
 <style scoped>
-.card-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.input {
-    border: none;
-    outline: none;
-    width: fit-content;
-}
 </style>
