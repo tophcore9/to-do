@@ -8,12 +8,15 @@
 /* IMPORTS */
 import {defineComponent, type PropType} from "vue";
 import TodoItem from "@/components/TodoItem.vue";
-import type {ITodoItem} from "@/main.ts";
+import "@/main.ts";
+import type {ITodoItem} from "@/firebase/firebaseConfig.ts";
+
 
 /* COMPONENTS */
 defineComponent({
     TodoItem
 });
+
 
 /* PROPS */
 defineProps({
@@ -23,8 +26,10 @@ defineProps({
     }
 })
 
+
 /* EMITS */
 const emit = defineEmits(["removeItem", "updateItem"]);
+
 
 /* METHODS */
 const removeItem = (id: string) => {

@@ -1,6 +1,6 @@
 <template>
-    <div class="card card-body p-2 pl-5 mb-5" :class="{'has-background-success-light' : item.done}">
-        <input type="text" class="input" :class="{'has-text-overline has-text-success' : item.done}" v-model="item.content">
+    <div @click.self="showMore(item.content)" class="card card-body p-2 pl-5 mb-5" :class="{'has-background-success-light' : item.done}">
+        <div type="text" :class="{'has-text-overline has-text-success' : item.done}">{{item.content}}</div>
         <div>
             <button @click="updateItem" class="button mr-2" :class="{'has-background-success has-text-light' : item.done}">
                 &check;
@@ -15,7 +15,8 @@
 <script setup lang="ts">
 /* IMPORTS */
 import type {PropType} from "vue";
-import type {ITodoItem} from "@/main.ts";
+import type {ITodoItem} from "@/firebase/firebaseConfig.ts";
+
 
 /* PROPS */
 const props = defineProps({
@@ -25,16 +26,21 @@ const props = defineProps({
     }
 });
 
+
 /* EMITS */
 const emit = defineEmits(["removeItem", "updateItem"]);
+
 
 /* METHODS */
 const removeItem = () => {
     emit("removeItem");
-}
+};
 const updateItem = () => {
     emit("updateItem");
-}
+};
+const showMore = (content: string) => {
+    console.log("Show dialog for: " + `${content}`);
+};
 </script>
 
 <style scoped>

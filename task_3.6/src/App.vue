@@ -13,9 +13,8 @@
 /* IMPORTS */
 import {defineComponent, onMounted, type Ref, ref} from "vue";
 import TodoList from "@/components/TodoList.vue";
-import type {ITodoItem} from "@/main.ts";
-import { firestoreDB, todoListCollectionRef } from "@/firebase/firebaseConfig.ts";
-import { doc, onSnapshot, getDoc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import {type ITodoItem, todoListCollectionRef} from "@/firebase/firebaseConfig.ts";
+import { doc, onSnapshot, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
 
 /* COMPONENTS */

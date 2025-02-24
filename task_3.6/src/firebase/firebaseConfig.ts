@@ -11,5 +11,18 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const firestoreDB = getFirestore(app);
-export const todoListCollectionRef = collection(firestoreDB, 'todoList');
+
+interface ITodoItem {
+    id: string;
+    content: string;
+    done: boolean;
+}
+
+const firestoreDB = getFirestore(app);
+const todoListCollectionRef = collection(firestoreDB, 'todoList');
+
+export {
+    firestoreDB,
+    todoListCollectionRef,
+    type ITodoItem
+}
