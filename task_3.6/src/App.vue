@@ -13,44 +13,49 @@
 /* IMPORTS */
 import {defineComponent, onMounted, type Ref, ref} from "vue";
 import TodoList from "@/components/TodoList.vue";
-import { v4 as uuidv4 } from 'uuid';
 import type {ITodoItem} from "@/main.ts";
-import { firestoreDB } from "@/firebase/config.ts";
-import { collection, getDocs } from "firebase/firestore";
+import { firestoreDB, todoListCollectionRef } from "@/firebase/firebaseConfig.ts";
+import { doc, onSnapshot, addDoc, deleteDoc } from "firebase/firestore";
 
-/* MOUNTING */
-onMounted(async () => {
-    const querySnapshot = await getDocs(collection(firestoreDB, "todoList"));
-
-    let newTodoList: ITodoItem[] = [];
-
-    querySnapshot.forEach((doc) => {
-        newTodoList.push({
-            id: doc.id,
-            content: doc.data().content,
-            done: doc.data().done
-        });
-    });
-
-    todoList.value = newTodoList;
-})
 
 /* COMPONENTS */
 defineComponent({TodoList});
+
 
 /* REACTIVE DATA */
 const todoList: Ref<ITodoItem[]> = ref([]);
 const currentAddValue = ref('');
 
+
+/* MOUNTING */
+onMounted(async () => {
+    onSnapshot(todoListCollectionRef, (querySnapshot) => {
+        let newTodoList: ITodoItem[] = [];
+
+        querySnapshot.forEach((doc) => {
+            newTodoList.push({
+                id: doc.id,
+                content: doc.data().content,
+                done: doc.data().done
+            });
+        });
+
+        todoList.value = newTodoList;
+    });
+})
+
+
 /* METHODS */
 const addItem = () => {
-    todoList.value.push({
-        id: uuidv4(),
+    addDoc(todoListCollectionRef, {
         content: currentAddValue.value,
         done: false
     });
+
+    currentAddValue.value = "";
 };
 const removeItem = (id: string) => {
+    deleteDoc(doc(firestoreDB, 'todoList', id));
     todoList.value = todoList.value.filter(todo => todo.id !== id);
 }
 </script>

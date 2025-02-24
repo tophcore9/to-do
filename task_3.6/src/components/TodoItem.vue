@@ -2,7 +2,7 @@
     <div class="card card-body p-2 pl-5 mb-5" :class="{'has-background-success-light' : item.done}">
         <input type="text" class="input" :class="{'has-text-overline has-text-success' : item.done}" v-model="item.content">
         <div>
-            <button @click="toggleCompleteItem" class="button mr-2" :class="{'has-background-success has-text-light' : item.done}">
+            <button @click="toggleDone" class="button mr-2" :class="{'has-background-success has-text-light' : item.done}">
                 &check;
             </button>
             <button @click="removeItem" class="button is-danger has-text-light">
@@ -32,7 +32,7 @@ const emit = defineEmits(["removeItem"]);
 const removeItem = () => {
     emit("removeItem");
 }
-const toggleCompleteItem = () => {
+const toggleDone = () => {
     props.item.done = !props.item.done;
 }
 </script>
