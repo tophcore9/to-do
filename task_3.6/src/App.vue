@@ -5,7 +5,7 @@
             <input v-model="currentAddValue" type="text" class="input mb-5 p-5" placeholder="Add a task">
             <button class="button w-3 mb-5 p-3 is-success has-text-light" :disabled="!currentAddValue">Add</button>
         </form>
-        <TodoList @remove-item="removeItem" :items="todoList"/>
+        <TodoList @remove-item="removeItem" @update-item="updateItem" :items="todoList"/>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ import {defineComponent, onMounted, type Ref, ref} from "vue";
 import TodoList from "@/components/TodoList.vue";
 import type {ITodoItem} from "@/main.ts";
 import { firestoreDB, todoListCollectionRef } from "@/firebase/firebaseConfig.ts";
-import { doc, onSnapshot, addDoc, deleteDoc } from "firebase/firestore";
+import { doc, onSnapshot, getDoc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
 
 /* COMPONENTS */
@@ -55,8 +55,14 @@ const addItem = () => {
     currentAddValue.value = "";
 };
 const removeItem = (id: string) => {
-    deleteDoc(doc(firestoreDB, 'todoList', id));
-    todoList.value = todoList.value.filter(todo => todo.id !== id);
+    deleteDoc(doc(todoListCollectionRef, id));
+}
+const updateItem = (id: string) => {
+    const index = todoList.value.findIndex(task => task.id === id);
+
+    updateDoc(doc(todoListCollectionRef, id), {
+        done: !todoList.value[index].done
+    })
 }
 </script>
 

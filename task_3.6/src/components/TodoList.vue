@@ -1,6 +1,6 @@
 <template>
     <div v-for="item in items">
-        <TodoItem @remove-item="removeItem(item.id)" :item="item"/>
+        <TodoItem @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item"/>
     </div>
 </template>
 
@@ -24,11 +24,14 @@ defineProps({
 })
 
 /* EMITS */
-const emit = defineEmits(["removeItem"]);
+const emit = defineEmits(["removeItem", "updateItem"]);
 
 /* METHODS */
 const removeItem = (id: string) => {
     emit("removeItem", id);
+}
+const updateItem = (id: string) => {
+    emit("updateItem", id);
 }
 </script>
 
