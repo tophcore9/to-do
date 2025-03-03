@@ -1,6 +1,6 @@
 <template>
     <div v-for="(item, index) in items">
-        <TodoItem @show-item-dialog="showItemDialog(item.id)" @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item" :key="index"/>
+        <TodoItem @show-item-dialog="showItemDialog(item.id)" @update-item="updateItem(item.id)" :item="item" :key="index"/>
     </div>
 </template>
 

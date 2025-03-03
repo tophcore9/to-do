@@ -5,9 +5,6 @@
             <button @click="updateItem" class="button mr-2" :class="{'has-background-success has-text-light' : item.done}">
                 &check;
             </button>
-            <button @click="removeItem" class="button is-danger has-text-light">
-                &cross;
-            </button>
         </div>
     </div>
 </template>

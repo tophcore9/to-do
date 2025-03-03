@@ -16,6 +16,8 @@ const todoListCollectionRef = collection(firestoreDB, 'todoList');
 interface ITodoItem {
     id: string;
     content: string;
+    description: string;
+    createdAt: string;
     done: boolean;
 }
 

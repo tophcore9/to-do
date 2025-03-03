@@ -5,7 +5,12 @@
 
             <div>
                 <div>{{currentItem.content}}</div>
+                <div>{{currentItem.description}}</div>
                 <div>{{currentItem.done}}</div>
+                <div>{{currentItem.createdAt}}</div>
+                <button @click="removeItem" class="button is-danger has-text-light">
+                    &cross;
+                </button>
             </div>
         </div>
     </div>
@@ -31,7 +36,7 @@
                 </label>
             </div>
         </form>
-        <TodoList @show-item-dialog="showItemDialog" @remove-item="removeItem" @update-item="updateItem" :items="filteredTodoList"/>
+        <TodoList @show-item-dialog="showItemDialog" @update-item="updateItem" :items="filteredTodoList"/>
     </div>
 </template>
 
@@ -54,6 +59,8 @@ const isDialogShown = ref(false);
 const currentItem: Ref<ITodoItem> = ref({
     id: '',
     content: '',
+    description: '',
+    createdAt: '',
     done: false,
 });
 
@@ -77,13 +84,16 @@ const filteredTodoList = computed(() => {
 const addItem = () => {
     addDoc(todoListCollectionRef, {
         content: currentAddValue.value,
+        description: '',
+        createdAt: new Date().toString(),
         done: false
     });
 
     currentAddValue.value = "";
 };
-const removeItem = (id: string) => {
-    deleteDoc(doc(todoListCollectionRef, id));
+const removeItem = () => {
+    closeItemDialog();
+    deleteDoc(doc(todoListCollectionRef, currentItem.value.id));
 }
 const updateItem = (id: string) => {
     const index = todoList.value.findIndex(task => task.id === id);
@@ -95,9 +105,13 @@ const updateItem = (id: string) => {
 const showItemDialog = (id: string) => {
     const index = todoList.value.findIndex(task => task.id === id);
 
+    console.log(new Date().toDateString());
+
     currentItem.value = {
         id: todoList.value[index].id,
         content: todoList.value[index].content,
+        description: todoList.value[index].description,
+        createdAt: todoList.value[index].createdAt,
         done: todoList.value[index].done
     }
 
@@ -110,26 +124,4 @@ const closeItemDialog = () => {
 
 <style>
 @import './assets/css/app.css';
-.dialog {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.dialog-content {
-    height: 100%;
-    max-width: 50%;
-}
-.close-button {
-
-}
 </style>
