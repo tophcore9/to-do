@@ -19,9 +19,16 @@ interface ITodoItem {
     done: boolean;
 }
 
+enum TodoFilter {
+    All,
+    Done,
+    Undone
+}
+
 export {
     firebaseApp,
     firestoreDB,
     todoListCollectionRef,
-    type ITodoItem
+    type ITodoItem,
+    TodoFilter
 }

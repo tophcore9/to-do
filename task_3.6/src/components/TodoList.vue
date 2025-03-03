@@ -1,6 +1,6 @@
 <template>
-    <div v-for="item in items">
-        <TodoItem @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item"/>
+    <div v-for="(item, index) in items">
+        <TodoItem @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item" :key="index"/>
     </div>
 </template>
 
