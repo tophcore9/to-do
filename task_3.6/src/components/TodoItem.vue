@@ -44,19 +44,5 @@ const showMore = (content: string) => {
 </script>
 
 <style scoped>
-.card-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.input {
-    border: none;
-    outline: none;
-    width: fit-content;
-    background: transparent;
-}
-.has-text-overline {
-    text-decoration: line-through;
-}
+@import '../assets/css/todo_item.css';
 </style>

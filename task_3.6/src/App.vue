@@ -11,9 +11,10 @@
 
 <script setup lang="ts">
 /* IMPORTS */
-import {defineComponent, onMounted, type Ref, ref} from "vue";
+import {defineComponent, type Ref, ref} from "vue";
 import TodoList from "@/components/TodoList.vue";
 import {type ITodoItem, todoListCollectionRef} from "@/firebase/firebaseConfig.ts";
+import {useCollection} from "vuefire";
 import { doc, onSnapshot, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
 
@@ -22,26 +23,9 @@ defineComponent({TodoList});
 
 
 /* REACTIVE DATA */
-const todoList: Ref<ITodoItem[]> = ref([]);
+// const todoList: Ref<ITodoItem[]> = ref([]);
+const todoList: Ref<ITodoItem[]> = useCollection(todoListCollectionRef);
 const currentAddValue = ref('');
-
-
-/* MOUNTING */
-onMounted(async () => {
-    onSnapshot(todoListCollectionRef, (querySnapshot) => {
-        let newTodoList: ITodoItem[] = [];
-
-        querySnapshot.forEach((doc) => {
-            newTodoList.push({
-                id: doc.id,
-                content: doc.data().content,
-                done: doc.data().done
-            });
-        });
-
-        todoList.value = newTodoList;
-    });
-})
 
 
 /* METHODS */
@@ -66,17 +50,5 @@ const updateItem = (id: string) => {
 </script>
 
 <style>
-@import 'bulma/css/bulma.css';
-
-.container {
-    padding: 10px;
-    max-width: 700px !important;
-}
-
-.add-todo {
-    display: flex;
-    justify-content: stretch;
-    align-items: center;
-    gap: 5px;
-}
+@import './assets/css/app.css';
 </style>

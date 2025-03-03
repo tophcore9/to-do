@@ -39,7 +39,3 @@ const updateItem = (id: string) => {
     emit("updateItem", id);
 }
 </script>
-
-<style scoped>
-
-</style>
