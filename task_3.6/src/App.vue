@@ -1,4 +1,14 @@
 <template>
+    <div v-if="isDialogShown" class="dialog">
+        <div class="dialog-content">
+            <button @click="closeItemDialog" class="close-button theme-light">X</button>
+
+            <div>
+                <div>{{currentItem.content}}</div>
+                <div>{{currentItem.done}}</div>
+            </div>
+        </div>
+    </div>
     <div class="container theme-light">
         <h1 class="title has-text-centered">Todo list</h1>
         <form @submit.prevent="addItem">
@@ -21,7 +31,7 @@
                 </label>
             </div>
         </form>
-        <TodoList @remove-item="removeItem" @update-item="updateItem" :items="filteredTodoList"/>
+        <TodoList @show-item-dialog="showItemDialog" @remove-item="removeItem" @update-item="updateItem" :items="filteredTodoList"/>
     </div>
 </template>
 
@@ -39,7 +49,13 @@ defineComponent({TodoList});
 
 
 /* REACTIVE DATA */
-const todoList: Ref<ITodoItem[]> = useCollection(todoListCollectionRef);
+const todoList: Ref<ITodoItem[]> = useCollection<ITodoItem>(todoListCollectionRef);
+const isDialogShown = ref(false);
+const currentItem: Ref<ITodoItem> = ref({
+    id: '',
+    content: '',
+    done: false,
+});
 
 // Value that is in input for adding a new task
 const currentAddValue = ref('');
@@ -76,8 +92,44 @@ const updateItem = (id: string) => {
         done: !todoList.value[index].done
     })
 }
+const showItemDialog = (id: string) => {
+    const index = todoList.value.findIndex(task => task.id === id);
+
+    currentItem.value = {
+        id: todoList.value[index].id,
+        content: todoList.value[index].content,
+        done: todoList.value[index].done
+    }
+
+    isDialogShown.value = true;
+}
+const closeItemDialog = () => {
+    isDialogShown.value = false;
+}
 </script>
 
 <style>
 @import './assets/css/app.css';
+.dialog {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.dialog-content {
+    height: 100%;
+    max-width: 50%;
+}
+.close-button {
+
+}
 </style>

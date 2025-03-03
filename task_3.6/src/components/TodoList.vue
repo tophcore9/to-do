@@ -1,6 +1,6 @@
 <template>
     <div v-for="(item, index) in items">
-        <TodoItem @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item" :key="index"/>
+        <TodoItem @show-item-dialog="showItemDialog(item.id)" @remove-item="removeItem(item.id)" @update-item="updateItem(item.id)" :item="item" :key="index"/>
     </div>
 </template>
 
@@ -28,7 +28,7 @@ defineProps({
 
 
 /* EMITS */
-const emit = defineEmits(["removeItem", "updateItem"]);
+const emit = defineEmits(["removeItem", "updateItem", "showItemDialog"]);
 
 
 /* METHODS */
@@ -37,5 +37,8 @@ const removeItem = (id: string) => {
 }
 const updateItem = (id: string) => {
     emit("updateItem", id);
+}
+const showItemDialog = (id: string) => {
+    emit("showItemDialog", id);
 }
 </script>
