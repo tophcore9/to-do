@@ -23,7 +23,7 @@
 
             <button @click="currentItemToAdd.done = !currentItemToAdd.done" class="button mt-3 is-align-self-flex-start has-text-light" :class="currentItemToAdd.done ? 'is-success' : 'is-danger'">{{item.done ? 'Checked' : 'Unchecked'}}</button>
 
-            <button @click="removeItem(item.id)" class="button is-danger has-text-light">
+            <button @click="removeItem(item.id)" class="delete-button button is-danger has-text-light">
                 Delete
             </button>
         </div>

@@ -3,11 +3,11 @@
     <div class="container theme-light">
         <h1 class="title has-text-centered">Todo list</h1>
         <form @submit.prevent="addItem">
-            <div class="add-todo mb-4">
+            <div class="add-todo">
                 <input v-model="currentAddValue" type="text" class="input mb-5 p-5" placeholder="Add a task">
                 <button class="button w-3 mb-5 p-3 is-success has-text-light" :disabled="!currentAddValue">Add</button>
             </div>
-            <div class="radios mb-4">
+            <div class="radios mb-5">
                 <label class="radio filter-label" :class="filterValue === TodoFilter.All ? 'has-background-warning has-text-light' : ''">
                     <input @click="filterValue = TodoFilter.All" type="radio" value="all" class="filter" name="filter-all" checked>
                     All
