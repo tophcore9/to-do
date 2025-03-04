@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 /* IMPORTS */
-import {type PropType, type Ref, ref, toRef} from "vue";
+import {type PropType, type Ref, toRef} from "vue";
 import type {ITodoItem} from "@/firebase/firebaseConfig.ts";
 
 

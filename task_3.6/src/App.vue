@@ -1,7 +1,3 @@
-<!--ADD STYLES FOR DIALOG AND FILTERS-->
-
-<!--ADD POSSIBILITY TO CHANGE THE DATA INSIDE THE DIALOG-->
-
 <template>
     <Dialog :item="currentItem" :is-shown="isDialogShown" @remove-item="removeItem" @close-item-dialog="closeItemDialog" @update-item="updateItem"></Dialog>
     <div class="container theme-light">
@@ -12,16 +8,16 @@
                 <button class="button w-3 mb-5 p-3 is-success has-text-light" :disabled="!currentAddValue">Add</button>
             </div>
             <div class="radios mb-4">
-                <label class="radio">
-                    <input @click="filterValue = TodoFilter.All" type="radio" value="all" name="filter" checked>
+                <label class="radio filter-label" :class="filterValue === TodoFilter.All ? 'has-background-warning has-text-light' : ''">
+                    <input @click="filterValue = TodoFilter.All" type="radio" value="all" class="filter" name="filter-all" checked>
                     All
                 </label>
-                <label class="radio">
-                    <input @click="filterValue = TodoFilter.Done" type="radio" value="done" name="filter">
+                <label class="radio filter-label" :class="filterValue === TodoFilter.Done ? 'has-background-warning has-text-light' : ''">
+                    <input @click="filterValue = TodoFilter.Done" type="radio" value="done" class="filter" name="filter-done">
                     Done
                 </label>
-                <label class="radio">
-                    <input @click="filterValue = TodoFilter.Undone" type="radio" value="undone" name="filter">
+                <label class="radio filter-label" :class="filterValue === TodoFilter.Undone ? 'has-background-warning has-text-light' : ''">
+                    <input @click="filterValue = TodoFilter.Undone" type="radio" value="undone" class="filter" name="filter-undone">
                     Undone
                 </label>
             </div>
@@ -32,11 +28,11 @@
 
 <script setup lang="ts">
 /* IMPORTS */
-import { computed, defineComponent, type Ref, ref } from "vue";
+import {computed, defineComponent, type Ref, ref} from "vue";
 import TodoList from "@/components/TodoList.vue";
 import Dialog from "@/components/Dialog.vue";
-import { type ITodoItem, TodoFilter, todoListCollectionRef } from "@/firebase/firebaseConfig.ts";
-import { useCollection } from "vuefire";
+import {type ITodoItem, TodoFilter, todoListCollectionRef} from "@/firebase/firebaseConfig.ts";
+import {useCollection} from "vuefire";
 import {addDoc, deleteDoc, doc, updateDoc} from "firebase/firestore";
 
 
