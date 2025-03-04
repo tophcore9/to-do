@@ -41,5 +41,5 @@ const showItemDialog = () => {
 </script>
 
 <style scoped>
-@import '../assets/css/todo_item.css';
+@import '../assets/style/todo_item.css';
 </style>

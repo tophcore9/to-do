@@ -3,7 +3,7 @@
 <!--ADD POSSIBILITY TO CHANGE THE DATA INSIDE THE DIALOG-->
 
 <template>
-    <Dialog :item="currentItem" :is-shown="isDialogShown" @remove-item="removeItem" @close-item-dialog="closeItemDialog"></Dialog>
+    <Dialog :item="currentItem" :is-shown="isDialogShown" @remove-item="removeItem" @close-item-dialog="closeItemDialog" @update-item="updateItem"></Dialog>
     <div class="container theme-light">
         <h1 class="title has-text-centered">Todo list</h1>
         <form @submit.prevent="addItem">
@@ -26,7 +26,7 @@
                 </label>
             </div>
         </form>
-        <TodoList @show-item-dialog="showItemDialog" @update-item="updateItem" :items="filteredTodoList"/>
+        <TodoList @show-item-dialog="showItemDialog" @update-item="toggleDone" :items="filteredTodoList"/>
     </div>
 </template>
 
@@ -86,7 +86,16 @@ const removeItem = (id: string) => {
     closeItemDialog();
     deleteDoc(doc(todoListCollectionRef, id));
 }
-const updateItem = (id: string) => {
+const updateItem = (item: ITodoItem) => {
+    closeItemDialog();
+    updateDoc(doc(todoListCollectionRef, item.id), {
+        content: item.content,
+        description: item.description,
+        createdAt: item.createdAt,
+        done: item.done
+    });
+}
+const toggleDone = (id: string) => {
     const index = todoList.value.findIndex(task => task.id === id);
 
     updateDoc(doc(todoListCollectionRef, id), {
@@ -112,5 +121,5 @@ const closeItemDialog = () => {
 </script>
 
 <style>
-@import './assets/css/app.css';
+@import 'assets/style/app.css';
 </style>

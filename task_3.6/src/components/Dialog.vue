@@ -1,29 +1,43 @@
 <template>
     <div v-if="isShown" class="dialog">
-        <div class="dialog-content">
-            <button @click="closeItemDialog" class="close-button theme-light">X</button>
-
-            <div>
-                <div>{{item.content}}</div>
-                <div>{{item.description}}</div>
-                <div>{{item.done}}</div>
-                <div>{{item.createdAt}}</div>
-                <button @click="removeItem(item.id)" class="button is-danger has-text-light">
-                    &cross;
-                </button>
+        <div class="dialog-content theme-light">
+            <div class="is-align-self-flex-end mt-5">
+                <button @click="updateItem" class="button is-align-self-flex-end theme-light is-success has-text-light">Save</button>
+                <button @click="closeItemDialog" class="button is-align-self-flex-end is-danger has-text-light ml-2">Cancel</button>
             </div>
+
+            <label class="label">
+                Task:
+                <input class="input" v-model="currentItemToAdd.content" type="text">
+            </label>
+
+            <label class="label">
+                Description:
+                <textarea class="textarea" v-model="currentItemToAdd.description" rows="8"></textarea>
+            </label>
+
+            <label class="label">
+                Created at:
+                <input class="input" v-model="currentItemToAdd.createdAt" type="text" disabled>
+            </label>
+
+            <button @click="currentItemToAdd.done = !currentItemToAdd.done" class="button mt-3 is-align-self-flex-start has-text-light" :class="currentItemToAdd.done ? 'is-success' : 'is-danger'">{{item.done ? 'Checked' : 'Unchecked'}}</button>
+
+            <button @click="removeItem(item.id)" class="button is-danger has-text-light">
+                Delete
+            </button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 /* IMPORTS */
-import type {PropType} from "vue";
+import {type PropType, type Ref, ref, toRef} from "vue";
 import type {ITodoItem} from "@/firebase/firebaseConfig.ts";
 
 
 /* EMITS */
-const emit = defineEmits(["closeItemDialog", "removeItem"]);
+const emit = defineEmits(["closeItemDialog", "removeItem", "updateItem"]);
 
 
 /* PROPS */
@@ -39,9 +53,16 @@ const props = defineProps({
 });
 
 
+/* DATA */
+const currentItemToAdd: Ref<ITodoItem> = toRef(props, "item");
+
+
 /* METHODS */
 const closeItemDialog = () => {
     emit("closeItemDialog");
+}
+const updateItem = () => {
+    emit("updateItem", currentItemToAdd.value);
 }
 const removeItem = (id: string) => {
     emit("removeItem", id);
@@ -49,5 +70,5 @@ const removeItem = (id: string) => {
 </script>
 
 <style scoped>
-
+@import "../assets/style/dialog.css";
 </style>
