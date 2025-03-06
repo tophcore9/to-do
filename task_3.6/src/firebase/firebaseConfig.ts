@@ -21,7 +21,7 @@ interface ITodoItem {
     done: boolean;
 }
 
-enum TodoFilter {
+enum ETodoFilter {
     All,
     Done,
     Undone
@@ -32,5 +32,5 @@ export {
     firestoreDB,
     todoListCollectionRef,
     type ITodoItem,
-    TodoFilter
+    ETodoFilter
 }

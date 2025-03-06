@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 /* IMPORTS */
-import {type PropType, type Ref, toRef} from "vue";
+import {type PropType, ref, type Ref, watch} from "vue";
 import type {ITodoItem} from "@/firebase/firebaseConfig.ts";
 
 
@@ -54,7 +54,13 @@ const props = defineProps({
 
 
 /* DATA */
-const currentItemToAdd: Ref<ITodoItem> = toRef(props, "item");
+const currentItemToAdd: Ref<ITodoItem> = ref({ ...props.item });
+
+
+/* WATCH */
+watch(() => props.item, (newVal) => {
+    currentItemToAdd.value = { ...newVal };
+}, { immediate: true });
 
 
 /* METHODS */
