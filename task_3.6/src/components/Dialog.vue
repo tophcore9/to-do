@@ -1,7 +1,7 @@
 <template>
     <div v-if="isShown" class="dialog">
         <div class="dialog-content theme-light">
-            <div class="is-align-self-flex-end mt-5">
+            <div class="is-align-self-flex-end">
                 <button @click="updateItem" class="button is-align-self-flex-end theme-light is-success has-text-light">Save</button>
                 <button @click="closeItemDialog" class="button is-align-self-flex-end is-danger has-text-light ml-2">Cancel</button>
             </div>
