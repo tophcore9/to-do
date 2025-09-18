@@ -6,6 +6,10 @@ This is a simple and classic To-Do list application. It's built to demonstrate f
 
 ## 🚀 Getting Started
 
+### Preview
+
+https://github.com/user-attachments/assets/528e7bd2-3ee8-49e7-878d-6c63b9a25b94
+
 ### Installation
 
 1.  **Clone the repository:**
@@ -36,6 +40,7 @@ This is a simple and classic To-Do list application. It's built to demonstrate f
 * **HTML5**
 * **CSS3**
 * **JavaScript**
+* **Firebase**
 
 ---
 
