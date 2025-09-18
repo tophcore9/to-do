@@ -1,33 +1,79 @@
-# task_3.6
+# To-Do Application
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a simple and classic To-Do list application. It's built to demonstrate fundamental front-end development skills, including state management and component rendering.
 
-## Recommended IDE Setup
+---
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Getting Started
 
-## Type Support for `.vue` Imports in TS
+### Installation
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/tophcore9/to-do.git
+    cd to-do
+    ```
 
-## Customize configuration
+2.  **Install project dependencies:**
+    ```bash
+    npm install
+    ```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Running the Project
 
-## Project Setup
+1.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
 
-```sh
-yarn
-```
+2.  Open your browser and navigate to `http://localhost:5173` (or the specific port shown in your terminal).
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-yarn dev
-```
+## 🛠️ Technologies
 
-### Type-Check, Compile and Minify for Production
+* **Vue.js**
+* **HTML5**
+* **CSS3**
+* **JavaScript**
 
-```sh
-yarn build
-```
+---
+
+## ✨ Features
+
+* **Add New Tasks:** Easily add new tasks to your list.
+* **Mark as Complete:** Check off tasks once they're done.
+* **Delete Tasks:** Remove completed or unwanted tasks.
+
+---
+
+## 💡 Usage Examples
+
+This application can serve as:
+* A portfolio piece to showcase your front-end skills.
+* A simple tool for managing daily tasks.
+* A learning project to practice with Vue.js.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! If you would like to help improve this project, please follow these steps:
+
+1.  Fork this repository.
+2.  Create a new branch (`git checkout -b feature/your-feature-name`).
+3.  Make your changes and commit them (`git commit -m 'feat: add a new feature'`).
+4.  Push to your branch (`git push origin feature/your-feature-name`).
+5.  Create a **Pull Request**.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+---
+
+## 👨‍💻 Author
+
+* **Oleksii Paziura** - [@tophcore9](https://github.com/tophcore9)
